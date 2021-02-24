@@ -33,6 +33,8 @@ describe('TEST SUITE', () => {
   require('./tests/clio.js');  // FIP-16
   //require('./tests/performance-request-obt.js');
 
+  require('./tests/wrapping.js');  // FIP-17 Wrapping
+
   require('./tests/testnet-smoketest.js'); // Testnet smoketest. By default runs against local build.
   
 });

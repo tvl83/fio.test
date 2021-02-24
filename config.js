@@ -1,8 +1,9 @@
-const TESTURL = 'http://localhost:8889'           // Localhost
+//const TESTURL = 'http://localhost:8889'           // Localhost
 //const TESTURL = 'http://dev1.fio.dev:8888'          // DEV1
 //const TESTURL = 'http://44.238.153.162:8889'      // Devnet
 //const TESTURL = 'http://testnet.fioprotocol.io'   // Testnet
 //const TESTURL = 'https://fio.greymass.com'        // Mainnet
+const TESTURL = 'http://44.234.122.169:8889'        // Wrapping DEV Server
 
 
 const DEVTOOLSDIR = '../fio.devtools'
