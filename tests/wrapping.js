@@ -4,6 +4,12 @@ const {newUser, fetchJson, timeout, getTestType, callFioApi, callFioApiSigned} =
 const {FIOSDK } = require('@fioprotocol/fiosdk')
 config = require('../config.js');
 const testType = getTestType();
+const Eth = require('web3-eth');
+
+const Web3 = require('web3');
+let web3 = new Web3(Web3.givenProvider || '');
+
+//var eth = new Eth('');
 
 before(async () => {
   faucet = new FIOSDK(config.FAUCET_PRIV_KEY, config.FAUCET_PUB_KEY, config.BASE_URL, fetchJson);
@@ -15,10 +21,18 @@ describe.only('************************** wrapping.js **************************
     const maxOracleFee = 1000000000,
         amount = 100000000000,  //100 FIO
         chainCode = 'ETH',
-        publicAddress = '0x3BDAfc1a2d47e24dA5F9740AEA919F35F8186eA3'
+        publicAddress = ''
 
     it(`Create users`, async () => {
         user1 = await newUser(faucet);
+        
+    })
+
+    it.only(`eth test`, async () => {
+        acct = await web3.eth.getAccounts();
+        console.log('acct: ', acct)
+        balance = web3.eth.getBalance(publicAddress)
+        console.log('balance: ', balance)
     })
 
     it('Echo oraclelgdrs table', async () => {
@@ -88,7 +102,7 @@ describe.only('************************** wrapping.js **************************
             data: {
                 amount: 100000000000,
                 chain_code: 'ETH',
-                public_address: '0x3BDAfc1a2d47e24dA5F9740AEA919F35F8186eA3',
+                public_address: publicAddress,
                 max_oracle_fee: 100000000000,
                 max_fee: 100000000000,
                 tpid: 'tpid@fiotestnet',
