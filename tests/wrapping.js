@@ -6,48 +6,356 @@ config = require('../config.js');
 const testType = getTestType();
 const Eth = require('web3-eth');
 
-const Web3 = require('web3');
-let web3 = new Web3(Web3.givenProvider || '');
+const ERC20FioWrapABI =  [
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "name_",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "symbol_",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "Approval",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "Transfer",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "symbol",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "decimals",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalSupply",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "balanceOf",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "transfer",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "spender",
+        "type": "address"
+      }
+    ],
+    "name": "allowance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "approve",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "transferFrom",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "addedValue",
+        "type": "uint256"
+      }
+    ],
+    "name": "increaseAllowance",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "subtractedValue",
+        "type": "uint256"
+      }
+    ],
+    "name": "decreaseAllowance",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
 
-//var eth = new Eth('');
+const Web3 = require('web3');
+let web3 = new Web3(Web3.givenProvider || 'ws://127.0.0.1:7545'); //ws://50.250.156.58:18546
+
+//const contractAddress = '0x409F0d72e4700884200df4B11394b10A3539EB94'
+//const tokenContract = new web3.eth.Contract(ERC20FioWrapABI, contractAddress)
+
 
 before(async () => {
   faucet = new FIOSDK(config.FAUCET_PRIV_KEY, config.FAUCET_PUB_KEY, config.BASE_URL, fetchJson);
 })
 
-describe.only('************************** wrapping.js ************************** \n    A. Wrap FIO. Confirm creation of ETH approve.', () => {
+describe('************************** wrapping.js ************************** \n    A. Wrap FIO. Confirm creation of ETH approve.', () => {
 
     let user1
     const maxOracleFee = 1000000000,
-        amount = 100000000000,  //100 FIO
+        amount = 123000000000,  //100 FIO
         chainCode = 'ETH',
-        publicAddress = ''
+        publicAddress = '0x3BDAfc1a2d47e24dA5F9740AEA919F35F8186eA3'
 
     it(`Create users`, async () => {
         user1 = await newUser(faucet);
+
+        console.log('user1 account: ', user1.account)
+        console.log('user1 priv: ', user1.privateKey)
+        console.log('user1 pub: ', user1.publicKey)
         
     })
 
-    it.only(`eth test`, async () => {
-        acct = await web3.eth.getAccounts();
-        console.log('acct: ', acct)
-        balance = web3.eth.getBalance(publicAddress)
-        console.log('balance: ', balance)
+    it(`eth test`, async () => {
+        let acct = await web3.eth.getAccounts();
+        console.log('acct: ', acct);
+
+        //console.log('balance: ', await web3.eth.balanceOf(publicAddress));
+        //console.log('Provider: ', await web3.eth.currentProvider);
+       // web3.eth.getProtocolVersion().then(console.log);
+
+
+       //balance = await testContract.methods.balanceOf(publicAddress);
+       //console.log('balance: ', balance._method)
+
+       //var decimal = tokenContract.decimals()
+       console.log('balance: ', tokenContract.balanceOf(publicAddress))
+       //var balance = tokenContract.balanceOf(address)
+       //var adjustedBalance = balance / Math.pow(10, decimal)
+       //var tokenName = tokenContract.name()
+       //var tokenSymbol = tokenContract.symbol()
     })
 
-    it('Echo oraclelgdrs table', async () => {
+    it('Echo oracleldgrs table', async () => {
         try {
           const json = {
             json: true,
             code: 'fio.oracle', 
             scope: 'fio.oracle', 
-            table: 'oraclelgdrs', 
+            table: 'oracleldgrs', 
             limit: 10,               
             reverse: false,         
             show_payer: false  
           }
           result = await callFioApi("get_table_rows", json);
-          console.log('oraclelgdrs: ', result);
+          console.log('oracleldgrs: ', result);
         } catch (err) {
           console.log('Error', err);
           expect(err).to.equal(null);
@@ -92,7 +400,7 @@ describe.only('************************** wrapping.js **************************
         }
       })
 
-    it(`Wrap FIO`, async () => {
+    it.skip(`Wrap FIO`, async () => {
         try {
           const result = await callFioApiSigned('push_transaction', {
             action: 'wraptokens',
@@ -100,16 +408,16 @@ describe.only('************************** wrapping.js **************************
             actor: user1.account,
             privKey: user1.privateKey,
             data: {
-                amount: 100000000000,
-                chain_code: 'ETH',
+                amount: amount,
+                chain_code: chainCode,
                 public_address: publicAddress,
-                max_oracle_fee: 100000000000,
-                max_fee: 100000000000,
-                tpid: 'tpid@fiotestnet',
+                max_oracle_fee: maxOracleFee,
+                max_fee: config.maxFee,
+                tpid: '',
                 actor: user1.account
             }
           })
-          console.log('Result: ', result.error)
+          console.log('Result: ', result)
           //expect(result.processed.receipt.status).to.equal('executed');
         } catch (err) {
           console.log('Error', err);
@@ -117,19 +425,19 @@ describe.only('************************** wrapping.js **************************
         }
       })
 
-      it('Echo oraclelgdrs table', async () => {
+      it('Echo oracleldgrs table', async () => {
         try {
           const json = {
             json: true,
             code: 'fio.oracle', 
             scope: 'fio.oracle', 
-            table: 'oraclelgdrs', 
+            table: 'oracleldgrs', 
             limit: 10,               
             reverse: false,         
             show_payer: false  
           }
           result = await callFioApi("get_table_rows", json);
-          console.log('oraclelgdrs: ', result);
+          console.log('oracleldgrs: ', result);
         } catch (err) {
           console.log('Error', err);
           expect(err).to.equal(null);
