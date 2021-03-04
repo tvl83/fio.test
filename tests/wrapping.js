@@ -312,7 +312,9 @@ describe('************************** wrapping.js ************************** \n  
     const maxOracleFee = 1000000000,
         amount = 123000000000,  //100 FIO
         chainCode = 'ETH',
-        publicAddress = '0x3BDAfc1a2d47e24dA5F9740AEA919F35F8186eA3'
+        publicAddress = '0x3BDAfc1a2d47e24dA5F9740AEA919F35F8186eA3',
+        publicAddressno0x = '3BDAfc1a2d47e24dA5F9740AEA919F35F8186eA3',
+        hex = 'dc5fceb668d810b04cfcf45ee0941a4b'  //remove the 0x
 
     it(`Create users`, async () => {
         user1 = await newUser(faucet);
@@ -322,6 +324,21 @@ describe('************************** wrapping.js ************************** \n  
         console.log('user1 pub: ', user1.publicKey)
         
     })
+
+    it.only(`byte test`, async () => {
+      const buf6 = Buffer.from('tést');
+      const buf = Buffer.from('dc5fceb668d810b04cfcf45ee0941a4b');
+      console.log('buf: ', buf)
+      console.log('buflen: ', Buffer.byteLength(hex))
+
+      const bufeth = Buffer.from(publicAddressno0x);
+      console.log('bufeth: ', bufeth)
+      console.log('bufethlength: ', Buffer.byteLength(publicAddressno0x));
+      
+
+      //const bufhex = Buffer.from('dc5fceb668d810b04cfcf45ee0941a4b', 'hex');
+      //console.log('bufhex: ', bufhex)
+  })
 
     it(`eth test`, async () => {
         let acct = await web3.eth.getAccounts();
@@ -400,7 +417,7 @@ describe('************************** wrapping.js ************************** \n  
         }
       })
 
-    it.skip(`Wrap FIO`, async () => {
+    it(`Wrap FIO`, async () => {
         try {
           const result = await callFioApiSigned('push_transaction', {
             action: 'wraptokens',
