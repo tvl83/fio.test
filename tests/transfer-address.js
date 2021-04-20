@@ -19,6 +19,8 @@ describe('************************** transfer-address.js ***********************
         walletA2 = await newUser(faucet);
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it('Get transfer_fio_address fee', async () => {
         try {
             result = await walletA1.sdk.getFee('transfer_fio_address', walletA1.address);
@@ -38,6 +40,8 @@ describe('************************** transfer-address.js ***********************
         //console.log('Result: ', result)
         expect(result.status).to.equal('OK')
     })
+
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
     it(`Add DASH and BCH addresses to walletA1.address2`, async () => {
         try {
@@ -66,7 +70,7 @@ describe('************************** transfer-address.js ***********************
         }
     })
 
-    it(`Wait a few seconds.`, async () => { await timeout(3000) })
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
     it(`getFioNames for walletA1 and confirm it owns 2 addresses and that one of them is walletA1.address2`, async () => {
         try {
@@ -143,6 +147,8 @@ describe('************************** transfer-address.js ***********************
             expect(err).to.equal(null);
         }
     })
+
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
     it('Confirm proper fee was collected', async () => {
         expect(feeCollected).to.equal(transfer_fio_address_fee)
@@ -1010,6 +1016,8 @@ describe('F. BRAVO ONLY: Confirm users with OBT records or Requests cannot trans
         user4 = await newUser(faucet);
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it('Get transfer_fio_address fee', async () => {
         try {
             result = await user1.sdk.getFee('transfer_fio_address', user1.address);
@@ -1101,6 +1109,8 @@ describe('F. BRAVO ONLY: Confirm users with OBT records or Requests cannot trans
             expect(err).to.equal(null)
         }
       })
+
+      it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
       it(`Transfer user3.address to user4. Expect error 500 - assertion failure with message: Transfering a FIO address is currently disabled for some fio.addresses`, async () => {
         try {

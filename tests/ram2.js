@@ -29,6 +29,8 @@ describe('************************** ram2.js ************************** \n    A.
     user1Address2 = generateFioAddress(user1Domain, 15)
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`Transfer FIO to ramuserPublicKey to fund account. Test: INITIALACCOUNTRAM`, async () => {
     const result = await faucet.genericAction('transferTokens', {
       payeeFioPublicKey: user1.publicKey,
@@ -39,6 +41,8 @@ describe('************************** ram2.js ************************** \n    A.
     expect(result).to.have.all.keys('transaction_id', 'block_num', 'status', 'fee_collected')
     await setRam(user1, 'INITIALACCOUNTRAM', 0)
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Test: REGDOMAINRAM`, async () => {
     const result = await user1sdk.genericAction('registerFioDomain', {
@@ -51,6 +55,8 @@ describe('************************** ram2.js ************************** \n    A.
     await setRam(user1, 'REGDOMAINRAM', result.fee_collected)
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`Test: REGADDRESSRAM`, async () => {
     const result = await user1sdk.genericAction('registerFioAddress', {
       fioAddress: user1Address,
@@ -61,6 +67,8 @@ describe('************************** ram2.js ************************** \n    A.
     expect(result.status).to.equal('OK')
     await setRam(user1, 'REGADDRESSRAM', result.fee_collected)
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Test: ADDADDRESSRAM`, async () => {
     const result = await user1sdk.genericAction('addPublicAddresses', {
@@ -114,6 +122,8 @@ describe('************************** ram2.js ************************** \n    A.
     expect(result.status).to.equal('OK')
     await setRam(user1, 'REGADDRESSRAM', result.fee_collected)
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Test: NEWFUNDSREQUESTRAM`, async () => {
     try {

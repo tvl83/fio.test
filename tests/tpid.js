@@ -403,6 +403,8 @@ describe(`B. User that has proxied their vote is sent FIO with TPID registered a
     user2 = await newUser(faucet);
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`Register proxy1 as a proxy`, async () => {
     try {
       const result = await proxy1.sdk.genericAction('pushTransaction', {
@@ -421,6 +423,8 @@ describe(`B. User that has proxied their vote is sent FIO with TPID registered a
       expect(err).to.equal('null')
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it('Confirm proxy1: is_proxy = 1, is_auto_proxy = 0', async () => {
     let inVotersTable;
@@ -503,6 +507,8 @@ describe(`B. User that has proxied their vote is sent FIO with TPID registered a
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it('Confirm user1: proxy = NULL, producers = bp1', async () => {
     let inVotersTable;
     try {
@@ -553,6 +559,8 @@ describe(`B. User that has proxied their vote is sent FIO with TPID registered a
       expect(err).to.equal('null')
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it('Confirm user1 is still: proxy = NULL, producers = bp1', async () => {
     let inVotersTable;
@@ -934,6 +942,8 @@ describe(`M. User that is auto proxied votes for proxy. Confirm is_auto_proxy is
     user1.address2 = generateFioAddress(user1.domain, 5)
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`Register proxy1 as a proxy`, async () => {
     try {
       const result = await proxy1.sdk.genericAction('pushTransaction', {
@@ -953,7 +963,7 @@ describe(`M. User that is auto proxied votes for proxy. Confirm is_auto_proxy is
     }
   })
 
-  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Register user1.address2 with proxy1 as TPID (valid tpid)`, async () => {
     const result = await user1.sdk.genericAction('registerFioAddress', {
@@ -964,6 +974,8 @@ describe(`M. User that is auto proxied votes for proxy. Confirm is_auto_proxy is
     //console.log('Result: ', result)
     expect(result.status).to.equal('OK')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it('Confirm user1 is_auto_proxy = 1', async () => {
     let inVotersTable;
@@ -1015,6 +1027,8 @@ describe(`M. User that is auto proxied votes for proxy. Confirm is_auto_proxy is
       expect(err).to.equal('null')
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
   
   it.skip('(BUG BD-2270) Confirm user1: is_auto_proxy = 0', async () => {
     let inVotersTable;

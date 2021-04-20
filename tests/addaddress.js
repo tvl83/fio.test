@@ -537,6 +537,8 @@ describe(`FIP18. Chain-level addressing`, () => {
         userB1 = await newUser(faucet);
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(3000) })
+
     it(`(sdk) add_pub_address with chain_code ETH, token_code ETH, and public_address addressA`, async () => {
         const result = await userB1.sdk.genericAction('addPublicAddresses', {
             fioAddress: userB1.address,

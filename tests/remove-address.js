@@ -1097,6 +1097,8 @@ describe(`F. Sad - result in error`, () => {
       userA2 = await newUser(faucet);
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+
   it(`Add public addresses to userA1`, async () => {
     try {
       const result = await userA1.sdk.genericAction('addPublicAddresses', {
@@ -1112,6 +1114,8 @@ describe(`F. Sad - result in error`, () => {
       expect(err).to.equal(null)
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(3000) })
 
   it(`Fixed in BD-1955, Remove with invalid FIO Address - Direct API call. Expect error: ${config.error2.invalidFioAddress.message}`, async () => {
     const result = await callFioApiSigned('push_transaction', {
@@ -1269,7 +1273,7 @@ describe(`F. Sad - result in error`, () => {
   })
 
   it('Wait a few seconds to avoid duplicate transaction.', async () => {
-    await timeout(2000);
+    await timeout(5000);
   })
 
   it(`Add back public addresses to userA1`, async () => {
@@ -1287,6 +1291,8 @@ describe(`F. Sad - result in error`, () => {
       expect(err).to.equal(null)
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(3000) })
 
   it(`userA2 tries to remove userA1s public addresses. Expect error type ${config.error2.invalidSignature.statusCode}: ${config.error2.invalidSignature.message}`, async () => {
     try{
@@ -1338,6 +1344,8 @@ describe(`F. Sad - result in error`, () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+
   it(`Add public addresses to userA1 to use up one more bundle`, async () => {
     try {
       const result = await userA1.sdk.genericAction('addPublicAddresses', {
@@ -1359,6 +1367,8 @@ describe(`F. Sad - result in error`, () => {
       expect(err).to.equal(null)
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(3000) })
 
   it(`Get balance for userA1`, async () => {
     try {
@@ -1388,6 +1398,8 @@ describe(`F. Sad - result in error`, () => {
       expect(err).to.equal(null);
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(3000) })
 
   it(`Verify balance for userA1 = 0`, async () => {
     try {

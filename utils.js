@@ -134,6 +134,7 @@ async function newUser(faucet, newAccount=null, newPrivateKey=null, newPublicKey
     }
 
     try {
+        await timeout(4000)
         const result1 = await this.sdk.genericAction('isAvailable', {fioName: this.domain})
         if ( ! result1.is_registered ) {
             const result = await this.sdk.genericAction('registerFioDomain', {
@@ -150,6 +151,7 @@ async function newUser(faucet, newAccount=null, newPrivateKey=null, newPublicKey
     }
 
     try {
+        await timeout(4000)
         const result1 = await this.sdk.genericAction('isAvailable', {fioName: this.address})
         if ( ! result1.is_registered ) {
             const result = await this.sdk.genericAction('registerFioAddress', {
@@ -166,6 +168,7 @@ async function newUser(faucet, newAccount=null, newPrivateKey=null, newPublicKey
     }
 
     try {
+        await timeout(4000)
         const result = await this.sdk.genericAction('getFioBalance', {
           fioPublicKey: this.publicKey
         })

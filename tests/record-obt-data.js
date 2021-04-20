@@ -20,6 +20,8 @@ describe(`*********************** record-obt-data.js *********************** \n 
         userA2 = await newUser(faucet);
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it(`userA1 sends recordObtData to userA2`, async () => {
         try {
             const result = await userA1.sdk.genericAction('recordObtData', {
@@ -194,6 +196,8 @@ describe(`*********************** record-obt-data.js *********************** \n 
         }
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it('Call get_table_rows from fionames to get bundles remaining for userA2. Verify 0 bundles', async () => {
         let bundleCount
         try {
@@ -248,6 +252,8 @@ describe(`*********************** record-obt-data.js *********************** \n 
         }
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it(`Get balance for userA2`, async () => {
         try {
             const result = await userA2.sdk.genericAction('getFioBalance', {
@@ -276,6 +282,8 @@ describe(`*********************** record-obt-data.js *********************** \n 
             expect(err).to.equal(null);
         }
     })
+
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
     it(`Verify balance for userA2 = 0`, async () => {
         try {

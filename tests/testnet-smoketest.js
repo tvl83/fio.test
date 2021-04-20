@@ -689,6 +689,8 @@ describe('C. Request funds, approve and send', () => {
     expect(result.fee).to.be.a('number')
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`requestFunds`, async () => {
     const result = await fioSdk2.sdk.genericAction('requestFunds', {
       payerFioAddress: testFioAddressName,

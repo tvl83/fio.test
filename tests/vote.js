@@ -765,7 +765,7 @@ describe('C. Test proxying to a user who is also proxying (should fail)', () => 
     }
   })
 
-  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`proxyE1 votes for bp1@dapixdev`, async () => {
     try {
@@ -1257,7 +1257,7 @@ describe('E.2 Test vote_producer with and without FIO Address (FIP-9)', () => {
     voterG6 = await newUser(faucet);
   })
 
-  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Get bp1@dapixdev total_votes`, async () => {
     try {
@@ -1414,6 +1414,8 @@ describe('E.2 Test vote_producer with and without FIO Address (FIP-9)', () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
+
   it(`Get balance for voterG4`, async () => {
     try {
         const result = await voterG4.sdk.genericAction('getFioBalance', {
@@ -1507,6 +1509,8 @@ describe('E.2 Test vote_producer with and without FIO Address (FIP-9)', () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
+
   it(`Get balance for voterG5`, async () => {
     try {
         const result = await voterG5.sdk.genericAction('getFioBalance', {
@@ -1556,6 +1560,8 @@ describe('E.2 Test vote_producer with and without FIO Address (FIP-9)', () => {
         expect(err).to.equal(null)
     }
 })
+
+it(`Wait a few seconds.`, async () => { await timeout(8000) })
 
   it(`Get voterG5 last_vote_weight`, async () => {
     try {
@@ -1660,6 +1666,8 @@ describe('E.2 Test vote_producer with and without FIO Address (FIP-9)', () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
+
   it(`Get voterG6 last_vote_weight`, async () => {
     try {
       voterG6.last_vote_weight = await getAccountVoteWeight(voterG6.account);
@@ -1667,6 +1675,8 @@ describe('E.2 Test vote_producer with and without FIO Address (FIP-9)', () => {
       console.log('Error: ', err.json)
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
 
   it(`Confirm bp1@dapixdev total_votes increased by voterG6 last_vote_weight`, async () => {
     try {
@@ -1692,6 +1702,8 @@ describe('E.3 Test proxy_vote with and without FIO Address (FIP-9)', () => {
     voterG9 = await newUser(faucet);
     voterG10 = await newUser(faucet);
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
 
   it(`Get bp1@dapixdev total_votes`, async () => {
     try {
@@ -1831,6 +1843,8 @@ describe('E.3 Test proxy_vote with and without FIO Address (FIP-9)', () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
+
   it('Confirm NO fee was deducted from voterG7 account', async () => {
     let origBalance = balance
     try {
@@ -1920,6 +1934,8 @@ describe('E.3 Test proxy_vote with and without FIO Address (FIP-9)', () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
+
   it(`Add public addresses to voterG8 to use up one more bundle`, async () => {
     try {
       const result = await voterG8.sdk.genericAction('addPublicAddresses', {
@@ -1943,7 +1959,7 @@ describe('E.3 Test proxy_vote with and without FIO Address (FIP-9)', () => {
   })
 
   it('Wait a few seconds.', async () => {
-    await timeout(5000);
+    await timeout(8000);
   })
 
   it(`Confirm proxy_vote fee for voterG8 = ${config.api.proxy_vote.fee}`, async () => {
@@ -1990,6 +2006,8 @@ describe('E.3 Test proxy_vote with and without FIO Address (FIP-9)', () => {
       expect(err).to.equal(null);
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
 
   it('Confirm fee WAS deducted from voterG8 account', async () => {
     let origBalance = balance
@@ -2070,6 +2088,8 @@ describe('E.3 Test proxy_vote with and without FIO Address (FIP-9)', () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
+
   it('Confirm fee deducted from voterG9 account', async () => {
     let origBalance = balance
     try {
@@ -2132,6 +2152,8 @@ describe('E.3 Test proxy_vote with and without FIO Address (FIP-9)', () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
+
   it(`Add public addresses to voterG10 to use up one more bundle`, async () => {
     try {
       const result = await voterG10.sdk.genericAction('addPublicAddresses', {
@@ -2155,7 +2177,7 @@ describe('E.3 Test proxy_vote with and without FIO Address (FIP-9)', () => {
   })
 
   it('Wait a few seconds.', async () => {
-    await timeout(3000);
+    await timeout(8000);
   })
 
   it(`Confirm proxy_vote fee for voterG10 = ${config.api.proxy_vote.fee}`, async () => {
@@ -2202,6 +2224,8 @@ describe('E.3 Test proxy_vote with and without FIO Address (FIP-9)', () => {
       expect(err).to.equal(null);
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
 
   it('Confirm fee WAS deducted from voterG10 account', async () => {
     let origBalance = balance

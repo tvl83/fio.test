@@ -65,7 +65,7 @@ describe('************************** producer.js ************************** \n  
     }
   })
 
-  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
 
   it(`userA1 votes for prodA1 using address #1`, async () => {
     try {

@@ -176,6 +176,8 @@ describe('B. Add 3 sets of bundled transactions for FIO Address owned by other u
         user2 = await newUser(faucet);
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it('Get add_bundled_transactions_fee', async () => {
         try {
             result = await user1.sdk.getFee('add_bundled_transactions', user1.address);
@@ -300,6 +302,8 @@ describe('B. Add 3 sets of bundled transactions for FIO Address owned by other u
             }
         }
     })
+
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
     it(`Confirm fee collected = ${bundleSets} * add_bundled_transactions_fee`, async () => {
         expect(feeCollected).to.equal(add_bundled_transactions_fee * bundleSets)

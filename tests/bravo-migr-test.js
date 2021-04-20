@@ -1386,6 +1386,8 @@ describe(`Release v2.3.2 - fiotrxtss (NEW table) scripts`, () => {
       }
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(8000) })
+
     it('Call get_table_rows from recordobts (old table) and confirm OBT is in table', async () => {
       try {
         const json = {

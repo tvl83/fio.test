@@ -18,6 +18,8 @@ describe('************************** burn-address.js ************************** 
         wallet2 = await newUser(faucet);
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it(`Register walletA1.address2`, async () => {
         const result = await walletA1.sdk.genericAction('registerFioAddress', {
             fioAddress: walletA1.address2,
@@ -27,6 +29,8 @@ describe('************************** burn-address.js ************************** 
         //console.log('Result: ', result)
         expect(result.status).to.equal('OK')
     })
+
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
     it(`getFioNames for walletA1 and confirm it owns 2 addresses and that one of them is walletA1.address2`, async () => {
         try {
@@ -104,6 +108,8 @@ describe('************************** burn-address.js ************************** 
         }
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it(`getFioNames for walletA1 and confirm it now only owns 1 address`, async () => {
         try {
             walletA1FioNames = await walletA1.sdk.genericAction('getFioNames', {
@@ -174,6 +180,8 @@ describe('************************** burn-address.js ************************** 
             }
         }
     })
+
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
     it('Call get_table_rows from fionames to get bundles remaining for walletA1. Expect 0 bundles', async () => {
         try {
@@ -248,6 +256,8 @@ describe('************************** burn-address.js ************************** 
             expect(err).to.equal(null);
         }
     })
+
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
     it(`Call get_table_rows from fionames. Verify address not in table.`, async () => {
         let inTable = false;
@@ -703,6 +713,8 @@ describe('F. Confirm active producers and proxy cannot burn address', () => {
         proxy1 = await newUser(faucet);
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it('Get transfer_fio_address fee', async () => {
         try {
             result = await user1.sdk.getFee('burn_fio_address', user1.address);
@@ -734,6 +746,8 @@ describe('F. Confirm active producers and proxy cannot burn address', () => {
         } 
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it(`Wait a few seconds.`, async () => { await timeout(3000) })
 
     it(`Burn prod1.address. Expect error 400:  ${config.error.activeProducer}`, async () => {
@@ -756,6 +770,8 @@ describe('F. Confirm active producers and proxy cannot burn address', () => {
         }
     })
 
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
     it(`Register proxy1 as a proxy`, async () => {
         try {
           const result = await proxy1.sdk.genericAction('pushTransaction', {
@@ -775,7 +791,7 @@ describe('F. Confirm active producers and proxy cannot burn address', () => {
         }
     })
 
-    it(`Wait a few seconds.`, async () => { await timeout(3000) })
+    it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
     it('Confirm is_proxy = 1 for proxy1 ', async () => {
         try {

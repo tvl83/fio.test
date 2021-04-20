@@ -52,6 +52,8 @@ describe(`************************** transfer-locked-tokens-account-tests.js ***
   })
   */
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`(${testType}) Create fioSdk account: transferLockedTokens ${lockedFundsAmount}, canvote false, (20,40%) and (40,60%)`, async () => {
     if (testType == 'sdk') {
       try {
@@ -111,6 +113,8 @@ describe(`************************** transfer-locked-tokens-account-tests.js ***
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`(${testType}) Create fioSdk account: transferLockedTokens ${lockedFundsAmount}, canvote false, (20,40%) and (40,60%)`, async () => {
     if (testType == 'sdk') {
       try {
@@ -169,6 +173,8 @@ describe(`************************** transfer-locked-tokens-account-tests.js ***
       }
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`getFioBalance for fioSdk and confirm 'available' = 0`, async () => {
     const result = await fioSdk.genericAction('getFioBalance', {})
@@ -263,6 +269,8 @@ describe(`************************** transfer-locked-tokens-account-tests.js ***
 
     await timeout(receiveTransferTimout)
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   let balance1, balance2;
   it(`[Fix for Bahamas release] getFioBalance for fioSdk and confirm 'available' > 0`, async () => {
@@ -364,6 +372,8 @@ describe(`************************** transfer-locked-tokens-account-tests.js ***
       console.log(e);
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 })
 
 describe('B. Testing generic actions', () => {
@@ -384,6 +394,8 @@ describe('B. Testing generic actions', () => {
     const publicKeyRes = FIOSDK.derivedPublicKey(privateKeyRes.fioKey)
     expect(publicKeyRes.publicKey).to.equal('FIO5kJKNHwctcfUM5XZyiWSqSTM5HTzznJP9F3ZdbhaQAHEVq575o')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`FIO SUF Utilities - amountToSUF`, async () => {
     const sufa = FIOSDK.amountToSUF (100)
@@ -506,6 +518,8 @@ describe('B. Testing generic actions', () => {
     expect(result.fee_collected).to.be.a('number')
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`Renew fio domain`, async () => {
     const result = await fioSdk.genericAction('renewFioDomain', { fioDomain: newFioDomain, maxFee: defaultFee })
 
@@ -514,6 +528,8 @@ describe('B. Testing generic actions', () => {
     expect(result.expiration).to.be.a('string')
     expect(result.fee_collected).to.be.a('number')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`setFioDomainVisibility true`, async () => {
     const result = await fioSdk.genericAction('setFioDomainVisibility', {
@@ -528,6 +544,8 @@ describe('B. Testing generic actions', () => {
     expect(result.fee_collected).to.be.a('number')
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`Register fio address`, async () => {
     const result = await fioSdk.genericAction('registerFioAddress', {
       fioAddress: newFioAddress,
@@ -538,6 +556,8 @@ describe('B. Testing generic actions', () => {
     expect(result.expiration).to.be.a('string')
     expect(result.fee_collected).to.be.a('number')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Register owner fio address`, async () => {
     const newFioAddress2 = generateFioAddress(newFioDomain, 7)
@@ -552,6 +572,8 @@ describe('B. Testing generic actions', () => {
     expect(result.fee_collected).to.be.a('number')
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`Renew fio address`, async () => {
     const result = await fioSdk.genericAction('renewFioAddress', { fioAddress: newFioAddress, maxFee: defaultFee })
     expect(result).to.have.all.keys('status', 'expiration', 'fee_collected')
@@ -559,6 +581,8 @@ describe('B. Testing generic actions', () => {
     expect(result.expiration).to.be.a('string')
     expect(result.fee_collected).to.be.a('number')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Push Transaction - renewaddress`, async () => {
     await timeout(2000)
@@ -577,6 +601,8 @@ describe('B. Testing generic actions', () => {
     expect(result.expiration).to.be.a('string')
     expect(result.fee_collected).to.be.a('number')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`getFioNames`, async () => {
     const result = await fioSdk.genericAction('getFioNames', { fioPublicKey: publicKey })
@@ -610,6 +636,8 @@ describe('B. Testing generic actions', () => {
     expect(result.fee_collected).to.be.a('number')
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`setFioDomainVisibility true`, async () => {
     const result = await fioSdk.genericAction('setFioDomainVisibility', {
       fioDomain: newFioDomain,
@@ -622,6 +650,8 @@ describe('B. Testing generic actions', () => {
     expect(result.status).to.be.a('string')
     expect(result.fee_collected).to.be.a('number')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`getFee for transferFioDomain`, async () => {
     const result = await fioSdk.genericAction('getFeeForTransferFioDomain', {
@@ -649,6 +679,8 @@ describe('B. Testing generic actions', () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`getFee for addPublicAddress`, async () => {
     const result = await fioSdk.genericAction('getFeeForAddPublicAddress', {
       fioAddress: newFioAddress
@@ -673,6 +705,8 @@ describe('B. Testing generic actions', () => {
     expect(result.fee_collected).to.be.a('number')
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`Add public addresses`, async () => {
     const result = await fioSdk.genericAction('addPublicAddresses', {
       fioAddress: newFioAddress,
@@ -696,6 +730,8 @@ describe('B. Testing generic actions', () => {
     expect(result.status).to.be.a('string')
     expect(result.fee_collected).to.be.a('number')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`getFee for removePublicAddresses`, async () => {
     const result = await fioSdk.genericAction('getFeeForRemovePublicAddresses', {
@@ -724,6 +760,8 @@ describe('B. Testing generic actions', () => {
     expect(result.status).to.be.a('string')
     expect(result.fee_collected).to.be.a('number')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`getFee for removeAllPublicAddresses`, async () => {
 
@@ -758,6 +796,8 @@ describe('B. Testing generic actions', () => {
     expect(result.status).to.be.a('string')
     expect(result.fee_collected).to.be.a('number')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`isAvailable true`, async () => {
     const result = await fioSdk.genericAction('isAvailable', {
@@ -823,6 +863,8 @@ describe('C. Request funds, approve and send', () => {
   let requestId
   const memo = 'testing fund request'
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`getFee for requestFunds`, async () => {
     const result = await fioSdk2.genericAction('getFeeForNewFundsRequest', {
       payeeFioAddress: testFioAddressName2
@@ -869,6 +911,8 @@ describe('C. Request funds, approve and send', () => {
       expect(err).to.be.equal(null)
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`get_sent_fio_requests for fioSdk2`, async () => {
     try {
@@ -1000,7 +1044,7 @@ describe('D. Request funds, cancel funds request', () => {
     expect(result.fee_collected).to.be.a('number')
   })
 
-  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`cancel request`, async () => {
     try{
@@ -1016,6 +1060,8 @@ describe('D. Request funds, cancel funds request', () => {
       console.log(e);
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
 
   it(`getCancelledFioRequests`, async () => {
@@ -1064,7 +1110,7 @@ describe('E. Request funds, reject', () => {
     expect(result.fee_collected).to.be.a('number')
   })
 
-  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`getPendingFioRequests`, async () => {
     await timeout(4000)

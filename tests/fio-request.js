@@ -480,6 +480,7 @@ describe(`B. Test FIO Request error conditions`, () => {
     userB2 = await newUser(faucet);
     userB3 = await newUser(faucet);
   })
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
 
   it(`userB3 requests funds using userB2.address as payer and userB1.address as payee`, async () => {
     try {
@@ -711,6 +712,8 @@ describe(`B. Test FIO Request error conditions`, () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`userB2 records OBT response to transaction`, async () => {
       try {
         const result = await userB2.sdk.genericAction('recordObtData', {
@@ -738,6 +741,8 @@ describe(`B. Test FIO Request error conditions`, () => {
         expect(err).to.equal(null)
       }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
    it(`Cancel request after it was approved returns ${config.error.invalidRequestStatus}`, async () => {
     try{
@@ -864,6 +869,8 @@ describe(`B. Test FIO Request error conditions`, () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`Verify balance for userB1 = 0`, async () => {
     try {
       const result = await userB1.sdk.genericAction('getFioBalance', {
@@ -949,6 +956,8 @@ describe(`B. Test FIO Request error conditions`, () => {
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`userB3 rejects funds request`, async () => {
     try{
       const result = await userB3.sdk.genericAction('pushTransaction', {
@@ -970,7 +979,7 @@ describe(`B. Test FIO Request error conditions`, () => {
   })
 
   it('Wait a few seconds to avoid duplicate transaction.', async () => {
-    await timeout(2000);
+    await timeout(5000);
   })
 
   it(`userB3 rejects funds request again. Error 400 returns ${config.error.ivalidRejection}`, async () => {
@@ -1321,6 +1330,8 @@ describe('D. cancel_funds_request with NO bundles remaining', () => {
     userB2 = await newUser(faucet);
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`Use up all of userB1's bundles with 51 record_obt_data transactions`, async () => {
     for (i = 0; i < 51; i++) {
       try {
@@ -1396,6 +1407,8 @@ describe('D. cancel_funds_request with NO bundles remaining', () => {
       expect(err).to.equal(null)
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`get_sent_fio_requests for userB1`, async () => {
     try {
@@ -1609,6 +1622,8 @@ describe(`E. Test cancel_funds_request error conditions`, () => {
       expect(err).to.equal(null)
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Cancel non-existent request. Expect error type 400: ${config.error.requestNotFound}`, async () => {
     try{
@@ -1920,6 +1935,8 @@ describe(`F. get_cancelled_fio_requests paging: Cancel multiple FIO requests and
     userC2 = await newUser(faucet);
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it('Transfer 5,000 FIO to userC1', async () => {
     try {
       const result = await faucet.genericAction('transferTokens', {
@@ -1958,7 +1975,7 @@ describe(`F. get_cancelled_fio_requests paging: Cancel multiple FIO requests and
     }
   })
 
-  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+  it(`Wait a few seconds.`, async () => { await timeout(8000) })
 
   it(`Make ${requestCount} requests for userC1`, async () => {
     for (i = 0; i < requestCount; i++) {
@@ -1986,6 +2003,8 @@ describe(`F. get_cancelled_fio_requests paging: Cancel multiple FIO requests and
       }
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Call (get_cancelled_fio_requests, no limit param, no offset param). Expect error 404: ${config.error.noFioRequests}`, async () => {
     try {
@@ -2023,6 +2042,8 @@ describe(`F. get_cancelled_fio_requests paging: Cancel multiple FIO requests and
       }
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Call (get_cancelled_fio_requests, no limit param, no offset param). Expect ${requestCount} results`, async () => {
     try {
@@ -2213,6 +2234,8 @@ describe(`G. Test rejection of FIO Requests`, () => {
     user1 = await newUser(faucet);
     user2 = await newUser(faucet);
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`user1 creates 10 FIO Requests for user2`, async () => {
     for (i = 0; i < 10; i++) {
@@ -2431,6 +2454,8 @@ describe(`I. reject_funds_request: Check all getters after`, () => {
     userA2 = await newUser(faucet);
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`userA1 requests funds from userA2`, async () => {
     try {
       const result = await userA1.sdk.genericAction('requestFunds', {
@@ -2498,6 +2523,8 @@ describe(`I. reject_funds_request: Check all getters after`, () => {
       expect(err).to.equal(null)
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`get_sent_fio_requests for userA1 (payee) AFTER Reject`, async () => {
     try {
@@ -2673,6 +2700,8 @@ describe(`J. get_received_fio_requests error conditions`, () => {
     userA2 = await newUser(faucet);
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`get_received_fio_requests with no requests. Expect: ${config.error.noFioRequests}`, async () => {
     try {
       const json = {
@@ -2713,6 +2742,8 @@ describe(`J. get_received_fio_requests error conditions`, () => {
       expect(err).to.equal(null)
     }
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`get_received_fio_requests with invalid public key. Expect: ${config.error.invalidKey}`, async () => {
     try {

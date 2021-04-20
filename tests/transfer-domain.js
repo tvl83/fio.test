@@ -20,6 +20,8 @@ describe('************************** transfer-domain.js ************************
       walletA2 = await newUser(faucet);
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+
   it('Get transfer_fio_domain fee', async () => {
     try {
       result = await walletA1.sdk.getFee('transfer_fio_domain', walletA1.address);
@@ -44,6 +46,8 @@ describe('************************** transfer-domain.js ************************
         expect(err).to.equal(null)
     }
   })
+  
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`Register walletA1.address2`, async () => {
       const result = await walletA1.sdk.genericAction('registerFioAddress', {
@@ -55,7 +59,7 @@ describe('************************** transfer-domain.js ************************
       expect(result.status).to.equal('OK')
   })
 
-  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it(`getFioNames for walletA1 and confirm it owns 2 domains and that one of them is walletA1.domain2`, async () => {
       try {
@@ -148,7 +152,7 @@ describe('************************** transfer-domain.js ************************
     }
   })
 
-  it(`Wait a few seconds.`, async () => { await timeout(3000) })
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it('Confirm proper fee was collected', async () => {
     expect(feeCollected).to.equal(transfer_fio_domain_fee)
@@ -259,6 +263,8 @@ describe('B. Transfer a domain to FIO Public Key which does not map to existing 
       }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it(`(sdk) getFioBalance for non-existent walletB2 account. Expect error type 404: ${config.error.keyNotFound}`, async () => {
     try {
       const result = await faucet.genericAction('getFioBalance', {
@@ -312,6 +318,8 @@ describe('B. Transfer a domain to FIO Public Key which does not map to existing 
     }
   })
 
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
+
   it('Register walletB1.address2', async () => {
       const result = await walletB1.sdk.genericAction('registerFioAddress', {
         fioAddress: walletB1.address2,
@@ -321,6 +329,8 @@ describe('B. Transfer a domain to FIO Public Key which does not map to existing 
       //console.log('Result: ', result)
       expect(result.status).to.equal('OK')
   })
+
+  it(`Wait a few seconds.`, async () => { await timeout(5000) })
 
   it('getFioNames for walletB1 and confirm it owns 2 domains and one of them is walletB1.domain2', async () => {
     try {
